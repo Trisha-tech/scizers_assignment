@@ -21,8 +21,14 @@ mongoose.connection.on('error', (err) => {
 })
 /*MONGODB CONNECTION END*/
 
+
+/*ROUTE PATH STARTS*/
+const userAuthRoute = require('./routes/userAuthRoute.js');
+/*ROUTE PATH ENDS*/
+
 app.use(express.json());
 
+app.use('/user', userAuthRoute);
 
 
 app.get('/', (req, res) => {
