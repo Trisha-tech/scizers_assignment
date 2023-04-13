@@ -4,4 +4,6 @@ const userRouteController = require('../route-controllers/userRouteController.js
 
 router.post('/register', userRouteController.registerNewUser);
 
+router.post('/login', userRouteController.loginUser);
+
 module.exports = router;
