@@ -1,4 +1,5 @@
-const {validateContact, Contact} = require('../models/contactSchema.js');
+const { validateContact, Contact } = require('../models/contactSchema.js');
+
 
 // CREATE NEW CONTACT ROUTE STARTS
 exports.createNewContact = async (req, res) => {
@@ -23,3 +24,18 @@ exports.createNewContact = async (req, res) => {
     }
 };
 // CREATE NEW CONTACT ROUTE ENDS
+
+// GET REGISTERED USER CONTACTS ROUTE STARTS
+exports.getMyContacts = async (req, res) => {
+    try {
+        const myContacts = await Contact.find({ postedBy: req.user._id }).populate(
+            "postedBy",
+            "-password"
+        );
+
+        return res.status(200).json({ contacts: myContacts.reverse() });
+    } catch (err) {
+        console.log(err);
+    }
+};
+  // GET REGISTERED USER CONTACTS ROUTE ENDS
