@@ -47,9 +47,9 @@ exports.getMyContacts = async (req, res) => {
   exports.editContact = async (req, res) => {
     const { id } = req.body;
   
-    if (!id) return res.status(400).json({ error: "no id specified." });
+    if (!id) return res.status(400).json({ error: "No ID Specified." });
     if (!mongoose.isValidObjectId(id))
-      return res.status(400).json({ error: "please enter a valid id" });
+      return res.status(400).json({ error: "Please enter a valid ID" });
   
     try {
       const contact = await Contact.findOne({ _id: id });
@@ -57,7 +57,7 @@ exports.getMyContacts = async (req, res) => {
       if (req.user._id.toString() !== contact.postedBy._id.toString())
         return res
           .status(401)
-          .json({ error: "you can't edit other people contacts!" });
+          .json({ error: "Can't edit other people contacts!" });
   
       const updatedData = { ...req.body, id: undefined };
       const result = await Contact.findByIdAndUpdate(id, updatedData, {
