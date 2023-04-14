@@ -11,4 +11,6 @@ router.put('/edit', auth, contactRouteController.editContact);
 
 router.delete('/delete/:id', auth, contactRouteController.deleteContact);
 
+router.get('/getContact/:id', auth, contactRouteController.deleteContact);
+
 module.exports = router;

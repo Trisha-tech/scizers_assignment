@@ -102,4 +102,24 @@ exports.deleteContact = async (req, res) => {
         console.log(err);
     }
 };
-      // DELETE A CONTACT ROUTE ENDSS
+// DELETE A CONTACT ROUTE ENDS
+
+
+// GET A SINGLE CONTACT ROUTE STARTS
+exports.getSingleContact = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) return res.status(400).json({ error: "No ID Specified." });
+
+    if (!mongoose.isValidObjectId(id))
+        return res.status(400).json({ error: "Please enter a valid ID" });
+
+    try {
+        const contact = await Contact.findOne({ _id: id });
+
+        return res.status(200).json({ ...contact._doc });
+    } catch (err) {
+        console.log(err);
+    }
+};
+  // GET A SINGLE CONTACT ROUTE ENDS
