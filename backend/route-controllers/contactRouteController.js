@@ -1,4 +1,5 @@
 const { validateContact, Contact } = require('../models/contactSchema.js');
+const mongoose = require("mongoose");
 
 
 // CREATE NEW CONTACT ROUTE STARTS
@@ -39,3 +40,33 @@ exports.getMyContacts = async (req, res) => {
     }
 };
   // GET REGISTERED USER CONTACTS ROUTE ENDS
+
+
+
+    // EDIT A CONTACT ROUTE STARTS
+  exports.editContact = async (req, res) => {
+    const { id } = req.body;
+  
+    if (!id) return res.status(400).json({ error: "no id specified." });
+    if (!mongoose.isValidObjectId(id))
+      return res.status(400).json({ error: "please enter a valid id" });
+  
+    try {
+      const contact = await Contact.findOne({ _id: id });
+  
+      if (req.user._id.toString() !== contact.postedBy._id.toString())
+        return res
+          .status(401)
+          .json({ error: "you can't edit other people contacts!" });
+  
+      const updatedData = { ...req.body, id: undefined };
+      const result = await Contact.findByIdAndUpdate(id, updatedData, {
+        new: true,
+      });
+  
+      return res.status(200).json({ ...result._doc });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+      // EDIT A CONTACT ROUTE ENDS
