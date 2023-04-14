@@ -7,6 +7,7 @@ import HomePage from "./allPages/HomePage";
 import Login from "./allPages/Login";
 import Register from "./allPages/Register";
 import CreateNewContact from "./allPages/CreateNewContact";
+import AllContacts from "./allPages/AllContacts";
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create" element={<CreateNewContact />} />
+            <Route path="/mycontacts" element={<AllContacts />} />
           </Switch>
         </MainPage>
       </AuthContextProvider>
