@@ -2,6 +2,8 @@ const User = require('../models/userSchema.js');
 const bcrypt = require(`bcrypt`);
 const jwt = require('jsonwebtoken');
 
+
+
 // REGISTER NEW USER ROUTE STARTS
 exports.registerNewUser = async (req, res) => {
     try {
@@ -96,3 +98,9 @@ exports.loginUser = async (req, res) => {
     }
 };
 // LOGIN USER ROUTE ENDS
+
+// GET LOGGEDIN USER PROFILE STARTS
+exports.myProfile = async (req, res) => {
+    return res.status(200).json({ ...req.user._doc });
+};
+  // GET LOGGEDIN USER PROFILE ENDS
