@@ -25,11 +25,13 @@ mongoose.connection.on('error', (err) => {
 
 /*ROUTE PATH STARTS*/
 const userAuthRoute = require('./routes/userAuthRoute.js');
+const contactRoute = require('./routes/contactRoute.js');
 /*ROUTE PATH ENDS*/
 
 app.use(express.json());
 
 app.use('/user', userAuthRoute);
+app.use('/contact', contactRoute);
 
 
 app.get("/protected",auth,(req,res)=>{
