@@ -1,8 +1,9 @@
 const express = require(`express`);
 const app = express();
 const PORT =  8080;
-const dotenv = require(`dotenv`)
-const mongoose = require('mongoose')
+const dotenv = require(`dotenv`);
+const mongoose = require('mongoose');
+const auth = require("./middleware/userAuth.js");
 
 dotenv.config({path : `.env`})
 
@@ -30,6 +31,10 @@ app.use(express.json());
 
 app.use('/user', userAuthRoute);
 
+
+app.get("/protected",auth,(req,res)=>{
+    return res.status(200).json({...req.user._doc});
+})
 
 app.get('/', (req, res) => {
     res.send(`Welcome to Scizers Assignment !!!    Made by Trisha Sahu`);
