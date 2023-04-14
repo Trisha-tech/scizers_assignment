@@ -9,4 +9,6 @@ router.get('/myContacts', auth, contactRouteController.getMyContacts);
 
 router.put('/edit', auth, contactRouteController.editContact);
 
+router.delete('/delete/:id', auth, contactRouteController.deleteContact);
+
 module.exports = router;
