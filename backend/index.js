@@ -29,6 +29,7 @@ const contactRoute = require('./routes/contactRoute.js');
 /*ROUTE PATH ENDS*/
 
 app.use(express.json());
+app.use(require("cors")());
 
 app.use('/user', userAuthRoute);
 app.use('/contact', contactRoute);
